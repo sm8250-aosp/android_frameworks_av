@@ -178,6 +178,8 @@ status_t FrameCaptureProcessor::onCapture(const sp<Layer> &layer,
         ALOGW("wait for fence returned err %d", err);
     }
 
+    mRE->cleanupPostRender(renderengine::RenderEngine::CleanupMode::CLEAN_ALL);
+
     for (auto layer : clientCompositionLayers) {
         sp<GraphicBuffer> gBuf = layer->source.buffer.buffer;
         mRE->unbindExternalTextureBuffer(gBuf->getId());
